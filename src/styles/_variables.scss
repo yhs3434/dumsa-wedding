@@ -1,0 +1,19 @@
+// 색상 변수
+$primary-color: #e74c3c;
+$secondary-color: #2c3e50;
+$tertiary-color: #7f8c8d;
+$accent-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+$background-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+$divider-gradient: linear-gradient(90deg, #e74c3c, #f39c12);
+
+// 기본 크기 및 여백
+$border-radius: 20px;
+$small-border-radius: 15px;
+$content-max-width: 400px;
+$base-padding: 20px;
+
+// 폰트 관련
+$font-family: "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+$title-font-size: 28px;
+$date-font-size: 24px;
+$time-font-size: 18px;

@@ -1,0 +1,155 @@
+@import "../../styles/variables";
+
+// 모바일 청첩장 스타일
+.container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: $base-padding;
+}
+
+.content {
+    background: white;
+    border-radius: $border-radius;
+    padding: 40px 30px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: $content-max-width;
+    width: 100%;
+}
+
+.header {
+    margin-bottom: 40px;
+
+    .title {
+        font-size: $title-font-size;
+        color: $secondary-color;
+        font-weight: 300;
+        letter-spacing: 2px;
+        margin-bottom: 20px;
+    }
+
+    .divider {
+        width: 80px;
+        height: 2px;
+        background: $divider-gradient;
+        margin: 0 auto;
+        border-radius: 1px;
+    }
+}
+
+.weddingInfo {
+    margin-bottom: 40px;
+
+    .dateSection {
+        background: #f8f9fa;
+        border-radius: $small-border-radius;
+        padding: 25px 20px;
+        border-left: 4px solid $primary-color;
+
+        .date {
+            font-size: $date-font-size;
+            font-weight: 600;
+            color: $secondary-color;
+            margin-bottom: 5px;
+        }
+
+        .day {
+            font-size: 16px;
+            color: $tertiary-color;
+            margin-bottom: 10px;
+        }
+
+        .time {
+            font-size: $time-font-size;
+            color: $primary-color;
+            font-weight: 500;
+        }
+    }
+}
+
+.statusSection {
+    margin-bottom: 30px;
+
+    .statusBadge {
+        background: $accent-gradient;
+        color: white;
+        padding: 12px 25px;
+        border-radius: 25px;
+        display: inline-block;
+        margin-bottom: 20px;
+
+        .statusText {
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+    }
+
+    .message {
+        font-size: 16px;
+        color: $tertiary-color;
+        line-height: 1.6;
+    }
+}
+
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .loadingDots {
+        display: flex;
+        gap: 8px;
+
+        span {
+            width: 8px;
+            height: 8px;
+            background: $primary-color;
+            border-radius: 50%;
+            animation: loading 1.4s ease-in-out infinite both;
+
+            &:nth-child(1) {
+                animation-delay: -0.32s;
+            }
+
+            &:nth-child(2) {
+                animation-delay: -0.16s;
+            }
+        }
+    }
+}
+
+@keyframes loading {
+    0%,
+    80%,
+    100% {
+        transform: scale(0);
+    }
+    40% {
+        transform: scale(1);
+    }
+}
+
+// 반응형 디자인
+@media (max-width: 480px) {
+    .content {
+        padding: 30px 20px;
+        margin: 10px;
+    }
+
+    .header .title {
+        font-size: 24px;
+    }
+
+    .weddingInfo .dateSection {
+        .date {
+            font-size: 22px;
+        }
+
+        .time {
+            font-size: 16px;
+        }
+    }
+}
