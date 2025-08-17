@@ -1,8 +1,13 @@
 import styles from "./page.module.scss";
 import Image from "next/image";
-import { Gowun_Dodum } from "next/font/google";
+import { Gowun_Dodum, Crimson_Pro } from "next/font/google";
 
 const gowunDodum = Gowun_Dodum({
+    subsets: ["latin"],
+    weight: "400",
+});
+
+const crimsonPro = Crimson_Pro({
     subsets: ["latin"],
     weight: "400",
 });
@@ -27,12 +32,10 @@ export default function InvitationPage() {
                 </section>
 
                 <section className={styles.welcome}>
-                    <article className={styles.welcomeTitle}>
-                        <h2 className={styles.subtitle}>
-                            You&apos;re Invited!
-                        </h2>
-                        <p className={styles.description}>
-                            Join us for a beautiful wedding celebration.
+                    <article className={styles.sectionTitle}>
+                        <p className={crimsonPro.className}>INVITATION</p>
+                        <p className={gowunDodum.className}>
+                            소중한 분들을 초대합니다
                         </p>
                     </article>
                     <article
@@ -89,6 +92,51 @@ export default function InvitationPage() {
                         </table>
                     </article>
                     <button>📞 연락하기</button>
+                </section>
+                <section className={styles.interview}>
+                    <article className={styles.sectionTitle}>
+                        <p className={crimsonPro.className}>INTERVIEW</p>
+                        <p className={gowunDodum.className}>
+                            우리 두 사람의 이야기
+                        </p>
+                    </article>
+                    <article>
+                        <p>결혼을 앞두고 저희 두 사람의</p>
+                        <p>인터뷰를 준비했습니다.</p>
+                    </article>
+                    <div className={styles.profileContainer}>
+                        <Image
+                            src="/images/sol.jpeg"
+                            alt="Interview"
+                            width={0} // 필수 props지만 0으로 두고
+                            height={0} // 자동 비율 계산
+                            sizes="100vw"
+                            style={{
+                                width: "40%",
+                                height: "auto",
+                                borderRadius: "12px",
+                            }}
+                        />
+                        <Image
+                            src="/images/goom.jpeg"
+                            alt="Interview"
+                            width={0} // 필수 props지만 0으로 두고
+                            height={0} // 자동 비율 계산
+                            sizes="100vw"
+                            style={{
+                                width: "40%",
+                                height: "auto",
+                                borderRadius: "12px",
+                            }}
+                        />
+                    </div>
+                    <button>✉️ 신랑&신부의 인터뷰 읽어보기</button>
+                </section>
+                <section className={styles.gallery}>
+                    <article className={styles.sectionTitle}>
+                        <p className={crimsonPro.className}>GALLERY</p>
+                        <p className={gowunDodum.className}>웨딩 갤러리</p>
+                    </article>
                 </section>
             </div>
         </main>
