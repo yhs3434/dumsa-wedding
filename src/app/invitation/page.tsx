@@ -1,5 +1,11 @@
 import styles from "./page.module.scss";
 import Image from "next/image";
+import { Gowun_Dodum } from "next/font/google";
+
+const gowunDodum = Gowun_Dodum({
+    subsets: ["latin"],
+    weight: "400",
+});
 
 export default function InvitationPage() {
     return (
@@ -27,7 +33,7 @@ export default function InvitationPage() {
                             Join us for a beautiful wedding celebration.
                         </p>
                     </article>
-                    <article className={styles.welcomeMessage}>
+                    <article className={gowunDodum.className}>
                         <p>서툰 마음으로 만난 두 사람이</p>
                         <p>사랑을 배우며 함께 자라났습니다.</p>
                         <p>이제 부부라는 이름으로 같은 길을 걸으려 합니다.</p>
