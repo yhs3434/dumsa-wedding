@@ -28,7 +28,9 @@ export default function InvitationPage() {
 
                 <section className={styles.welcome}>
                     <article className={styles.welcomeTitle}>
-                        <h2 className={styles.subtitle}>You're Invited!</h2>
+                        <h2 className={styles.subtitle}>
+                            You&apos;re Invited!
+                        </h2>
                         <p className={styles.description}>
                             Join us for a beautiful wedding celebration.
                         </p>
