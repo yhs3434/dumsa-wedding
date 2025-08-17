@@ -1,0 +1,40 @@
+@import "../../styles/variables";
+
+.container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.content {
+    flex: 1;
+    background: white;
+    max-width: $content-max-width;
+    width: 100%;
+}
+
+.intro {
+}
+
+.welcome {
+    display: flex;
+    flex-direction: column;
+    padding: 40px 0;
+    text-align: center;
+    gap: 40px;
+}
+
+.welcomeTitle {
+    color: $primary-color;
+    font-family: $title-font-family;
+}
+
+.welcomeMessage {
+    line-height: 2;
+}
+
+.contact {
+    padding: 40px 0;
+    text-align: center;
+}
