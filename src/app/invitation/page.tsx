@@ -1,6 +1,10 @@
+"use client";
+
+import React from "react";
 import styles from "./page.module.scss";
 import Image from "next/image";
 import { Gowun_Dodum, Crimson_Pro } from "next/font/google";
+import { FaChevronDown } from "react-icons/fa";
 
 const gowunDodum = Gowun_Dodum({
     subsets: ["latin"],
@@ -13,6 +17,8 @@ const crimsonPro = Crimson_Pro({
 });
 
 export default function InvitationPage() {
+    const [isGalleryOpen, setIsGalleryOpen] = React.useState<boolean>(false);
+
     return (
         <main className={styles.container}>
             <div className={styles.content}>
@@ -136,6 +142,34 @@ export default function InvitationPage() {
                     <article className={styles.sectionTitle}>
                         <p className={crimsonPro.className}>GALLERY</p>
                         <p className={gowunDodum.className}>웨딩 갤러리</p>
+                    </article>
+                    <article
+                        className={styles.galleryImageContainer}
+                        style={{
+                            height: isGalleryOpen ? undefined : "370px",
+                        }}
+                    >
+                        <Image
+                            src="/images/gallery.jpeg"
+                            alt="Gallery"
+                            width={0} // 필수 props지만 0으로 두고
+                            height={0} // 자동 비율 계산
+                            sizes="100vw"
+                            style={{
+                                width: "100%",
+                                height: "auto",
+                                borderRadius: "12px",
+                            }}
+                        />
+                        {!isGalleryOpen && (
+                            <div className={styles.galleryBottomContainer}>
+                                <div />
+                                <div onClick={() => setIsGalleryOpen(true)}>
+                                    <span>더보기</span>
+                                    <FaChevronDown />
+                                </div>
+                            </div>
+                        )}
                     </article>
                 </section>
             </div>
