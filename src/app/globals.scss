@@ -54,3 +54,332 @@ h6 {
 #__next {
     isolation: isolate;
 }
+
+// 캘린더 테이블 글로벌 스타일
+.calander_warpper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 0 20px;
+
+    .calander {
+        border-collapse: separate;
+        border-spacing: 2px;
+        width: 100%;
+        max-width: 380px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+
+        thead {
+            background: linear-gradient(
+                135deg,
+                $primary-color 0%,
+                lighten($primary-color, 10%) 100%
+            );
+
+            th {
+                padding: 18px 12px;
+                text-align: center;
+                font-weight: 500;
+                font-size: 15px;
+                color: white;
+                letter-spacing: 0.5px;
+                width: 14.28%; // 7개 컬럼이므로 균등 분할
+                min-width: 45px;
+
+                &:first-child {
+                    color: rgba(255, 255, 255, 0.95);
+                }
+
+                &:last-child {
+                    color: rgba(255, 255, 255, 0.95);
+                }
+            }
+        }
+
+        tbody {
+            td {
+                padding: 16px 8px;
+                text-align: center;
+                font-size: 16px;
+                color: $secondary-color;
+                background: white;
+                border-radius: 4px;
+                transition: all 0.2s ease;
+                position: relative;
+                width: 14.28%; // 균등 분할
+                min-width: 45px;
+                height: 50px;
+                vertical-align: middle;
+
+                &:hover:not(:empty) {
+                    background-color: rgba($primary-color, 0.08);
+                    transform: translateY(-1px);
+                }
+
+                // 빈 셀 스타일
+                &:empty {
+                    background-color: transparent;
+
+                    &:hover {
+                        background-color: transparent;
+                        transform: none;
+                    }
+                }
+
+                // 일요일 스타일
+                &:first-child:not(:empty) {
+                    color: #e74c3c;
+                    font-weight: 500;
+                }
+
+                // 토요일 스타일
+                &:last-child:not(:empty) {
+                    color: #3498db;
+                    font-weight: 500;
+                }
+
+                // 평일 스타일
+                &:not(:first-child):not(:last-child):not(:empty) {
+                    font-weight: 400;
+                }
+            }
+
+            tr {
+                &:not(:last-child) td {
+                    margin-bottom: 2px;
+                }
+            }
+        }
+    }
+}
+
+// 결혼식 날짜 하이라이트
+.dday {
+    background: linear-gradient(
+        135deg,
+        $primary-color 0%,
+        lighten($primary-color, 15%) 100%
+    );
+    color: white !important;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    font-weight: 600;
+    font-size: 16px;
+    box-shadow: 0 3px 10px rgba($primary-color, 0.4);
+    animation: pulse 2s ease-in-out infinite;
+}
+
+// D-Day 펄스 애니메이션
+@keyframes pulse {
+    0%,
+    100% {
+        transform: scale(1);
+        box-shadow: 0 3px 10px rgba($primary-color, 0.4);
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 4px 16px rgba($primary-color, 0.5);
+    }
+}
+
+// 반응형 디자인
+@media (max-width: 480px) {
+    .calander_warpper {
+        padding: 0 15px;
+
+        .calander {
+            max-width: 100%;
+            border-spacing: 1px;
+
+            thead th {
+                padding: 14px 6px;
+                font-size: 13px;
+                min-width: 35px;
+            }
+
+            tbody td {
+                padding: 12px 4px;
+                font-size: 14px;
+                min-width: 35px;
+                height: 42px;
+            }
+        }
+    }
+
+    .dday {
+        width: 32px;
+        height: 32px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 360px) {
+    .calander_warpper {
+        padding: 0 10px;
+
+        .calander {
+            thead th {
+                padding: 12px 4px;
+                font-size: 12px;
+                min-width: 30px;
+            }
+
+            tbody td {
+                padding: 10px 2px;
+                font-size: 13px;
+                min-width: 30px;
+                height: 38px;
+            }
+        }
+    }
+
+    .dday {
+        width: 28px;
+        height: 28px;
+        font-size: 13px;
+    }
+}
+
+// D-Day 카운트다운 스타일
+.dday-wrap {
+    margin-top: 30px;
+    padding: 30px 20px;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 16px;
+    text-align: center;
+
+    .countdown {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+
+        > div {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+
+            .desc {
+                font-size: 12px;
+                font-weight: 500;
+                color: $tertiary-color;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+                min-height: 16px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .card {
+                background: white;
+                border-radius: 8px;
+                padding: 12px 8px;
+                min-width: 50px;
+                font-size: 20px;
+                font-weight: 600;
+                color: $primary-color;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+                border: 1px solid rgba($primary-color, 0.1);
+                transition: all 0.3s ease;
+
+                &:hover {
+                    transform: translateY(-2px);
+                    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+                }
+            }
+
+            // 콜론(:) 스타일
+            > span:not(.card) {
+                font-size: 24px;
+                font-weight: bold;
+                color: $primary-color;
+                margin: 0 4px;
+                align-self: flex-end;
+                margin-bottom: 16px;
+            }
+        }
+    }
+
+    .subTitle {
+        font-size: 16px;
+        line-height: 1.5;
+        color: $secondary-color;
+        font-weight: 400;
+
+        p {
+            margin: 0;
+        }
+
+        span {
+            font-weight: 600;
+        }
+    }
+}
+
+// 반응형 디자인 (D-Day 카운트다운)
+@media (max-width: 480px) {
+    .dday-wrap {
+        padding: 25px 15px;
+        margin-top: 25px;
+
+        .countdown {
+            gap: 4px;
+
+            > div {
+                gap: 6px;
+
+                .desc {
+                    font-size: 11px;
+                }
+
+                .card {
+                    padding: 10px 6px;
+                    min-width: 42px;
+                    font-size: 18px;
+                }
+
+                > span:not(.card) {
+                    font-size: 20px;
+                    margin: 0 2px;
+                    margin-bottom: 14px;
+                }
+            }
+        }
+
+        .subTitle {
+            font-size: 14px;
+        }
+    }
+}
+
+@media (max-width: 360px) {
+    .dday-wrap {
+        .countdown {
+            > div {
+                .card {
+                    padding: 8px 5px;
+                    min-width: 38px;
+                    font-size: 16px;
+                }
+
+                > span:not(.card) {
+                    font-size: 18px;
+                    margin-bottom: 12px;
+                }
+            }
+        }
+    }
+}

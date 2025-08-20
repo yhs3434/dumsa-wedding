@@ -151,3 +151,33 @@
         }
     }
 }
+
+.calendar {
+    margin-top: 40px;
+    padding: 40px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 60px;
+}
+
+.calendarDate {
+    text-align: center;
+
+    p:nth-child(1) {
+        color: #544f4f;
+        font-size: 21px;
+        opacity: 0.95;
+    }
+
+    p:nth-child(2) {
+        font-weight: 400;
+        font-size: 16px;
+        opacity: 0.8;
+        color: #544f4f;
+        margin-top: 7px;
+    }
+}
+
+.calendarCalculator {
+}

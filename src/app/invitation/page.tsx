@@ -18,6 +18,41 @@ const crimsonPro = Crimson_Pro({
 
 export default function InvitationPage() {
     const [isGalleryOpen, setIsGalleryOpen] = React.useState<boolean>(false);
+    const [timeLeft, setTimeLeft] = React.useState({
+        days: 0,
+        hours: 0,
+        minutes: 0,
+        seconds: 0,
+    });
+
+    React.useEffect(() => {
+        const weddingDate = new Date("2025-11-15T14:30:00").getTime();
+
+        const updateCountdown = () => {
+            const now = new Date().getTime();
+            const distance = weddingDate - now;
+
+            if (distance > 0) {
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor(
+                    (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+                );
+                const minutes = Math.floor(
+                    (distance % (1000 * 60 * 60)) / (1000 * 60)
+                );
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                setTimeLeft({ days, hours, minutes, seconds });
+            } else {
+                setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+            }
+        };
+
+        updateCountdown();
+        const interval = setInterval(updateCountdown, 1000);
+
+        return () => clearInterval(interval);
+    }, []);
 
     return (
         <main className={styles.container}>
@@ -171,6 +206,136 @@ export default function InvitationPage() {
                             </div>
                         )}
                     </article>
+                </section>
+                <section className={styles.calendar}>
+                    <div className={styles.calendarDate}>
+                        <p>2025.11.15</p>
+                        <p>토요일 낮 2시 30분</p>
+                    </div>
+
+                    <div className="calander_warpper">
+                        <table className="calander" id="calander">
+                            <thead>
+                                <tr>
+                                    <th>일</th>
+                                    <th>월</th>
+                                    <th>화</th>
+                                    <th>수</th>
+                                    <th>목</th>
+                                    <th>금</th>
+                                    <th>토</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td className="cal_tr_td_1">1</td>
+                                </tr>
+                                <tr>
+                                    <td className="cal_tr_td_2">2</td>
+                                    <td className="cal_tr_td_3">3</td>
+                                    <td className="cal_tr_td_4">4</td>
+                                    <td className="cal_tr_td_5">5</td>
+                                    <td className="cal_tr_td_6">6</td>
+                                    <td className="cal_tr_td_7">7</td>
+                                    <td className="cal_tr_td_8">8</td>
+                                </tr>
+                                <tr>
+                                    <td className="cal_tr_td_9">9</td>
+                                    <td className="cal_tr_td_10">10</td>
+                                    <td className="cal_tr_td_11">11</td>
+                                    <td className="cal_tr_td_12">12</td>
+                                    <td className="cal_tr_td_13">13</td>
+                                    <td className="cal_tr_td_14">14</td>
+                                    <td>
+                                        <span className="dday">15</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td className="cal_tr_td_16">16</td>
+                                    <td className="cal_tr_td_17">17</td>
+                                    <td className="cal_tr_td_18">18</td>
+                                    <td className="cal_tr_td_19">19</td>
+                                    <td className="cal_tr_td_20">20</td>
+                                    <td className="cal_tr_td_21">21</td>
+                                    <td className="cal_tr_td_22">22</td>
+                                </tr>
+                                <tr>
+                                    <td className="cal_tr_td_23">23</td>
+                                    <td className="cal_tr_td_24">24</td>
+                                    <td className="cal_tr_td_25">25</td>
+                                    <td className="cal_tr_td_26">26</td>
+                                    <td className="cal_tr_td_27">27</td>
+                                    <td className="cal_tr_td_28">28</td>
+                                    <td className="cal_tr_td_29">29</td>
+                                </tr>
+                                <tr>
+                                    <td className="cal_tr_td_30">30</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div className="dday-wrap">
+                        <div className="countdown ft-gowun-bold">
+                            <div>
+                                <div className="desc">Days</div>
+                                <span className="card data-days">
+                                    {timeLeft.days}
+                                </span>
+                            </div>
+                            <div>
+                                <div className="desc">&nbsp;</div>
+                                <span>:</span>
+                            </div>
+                            <div>
+                                <div className="desc">Hour</div>
+                                <span className="card data-hour">
+                                    {String(timeLeft.hours).padStart(2, "0")}
+                                </span>
+                            </div>
+                            <div>
+                                <div className="desc">&nbsp;</div>
+                                <span>:</span>
+                            </div>
+                            <div>
+                                <div className="desc">Min</div>
+                                <span className="card data-min">
+                                    {String(timeLeft.minutes).padStart(2, "0")}
+                                </span>
+                            </div>
+                            <div>
+                                <div className="desc">&nbsp;</div>
+                                <span>:</span>
+                            </div>
+                            <div>
+                                <div className="desc">Sec</div>
+                                <span className="card data-sec">
+                                    {String(timeLeft.seconds).padStart(2, "0")}
+                                </span>
+                            </div>
+                        </div>
+                        <div className="subTitle v2 f18 call-comment ft-gowun-bold">
+                            <p>
+                                한솔, 재원의 결혼식이{" "}
+                                <span style={{ color: "#b27085" }}>
+                                    {timeLeft.days}
+                                </span>
+                                일 남았습니다.
+                            </p>
+                        </div>
+                    </div>
                 </section>
             </div>
         </main>
