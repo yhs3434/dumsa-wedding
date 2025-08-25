@@ -53,9 +53,7 @@ export function Contact(_props: ContactProps) {
                     width: "180px",
                     height: "auto",
                 }}
-                onClick={() => {
-                    // Handle button click
-                }}
+                onClick={handleButtonClick}
             />
         </div>
     );
