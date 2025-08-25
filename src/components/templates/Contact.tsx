@@ -383,7 +383,7 @@ export function Contact(_props: ContactProps) {
                                                     styles.contact_button
                                                 }
                                                 onClick={() =>
-                                                    handleCall("010-0000-0000")
+                                                    handleCall("010-5662-6973")
                                                 }
                                                 title="전화 걸기"
                                             >
@@ -394,7 +394,7 @@ export function Contact(_props: ContactProps) {
                                                     styles.contact_button
                                                 }
                                                 onClick={() =>
-                                                    handleSMS("010-0000-0000")
+                                                    handleSMS("010-5662-6973")
                                                 }
                                                 title="문자 보내기"
                                             >
