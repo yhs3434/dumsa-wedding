@@ -1,53 +1,25 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
+import { Intro, Balloon, Invitation } from "@/components/templates";
 
 export default function IntroPage() {
+    const [currentPage, setCurrentPage] = React.useState<
+        "intro" | "invitation"
+    >("intro");
+
+    React.useEffect(() => {
+        //
+    }, []);
+
     return (
         <div
             style={{
                 width: "100%",
             }}
         >
-            <div
-                style={{
-                    position: "relative",
-                    width: "100%",
-                }}
-            >
-                <div
-                    style={{
-                        width: "100%",
-                    }}
-                >
-                    <Image
-                        src="/images/intro/card.png"
-                        alt="A beautiful wedding"
-                        width={0}
-                        height={0}
-                        sizes="100vw"
-                        style={{ width: "100%", height: "auto" }}
-                    />
-                </div>
-                <div
-                    style={{
-                        position: "absolute",
-                        left: 0,
-                        bottom: 0,
-                        width: "100%",
-                    }}
-                >
-                    <Image
-                        src="/images/intro/silling.png"
-                        alt="A beautiful flower"
-                        width={0}
-                        height={0}
-                        sizes="100vw"
-                        style={{ width: "100%", height: "auto" }}
-                    />
-                </div>
-            </div>
+            <Intro visible={currentPage === "intro"} />
+            <Invitation visible={currentPage === "invitation"} />
         </div>
     );
 }
