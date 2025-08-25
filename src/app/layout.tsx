@@ -13,8 +13,19 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="ko">
-            <head></head>
-            <body>{children}</body>
+            <head>
+                <meta
+                    name="viewport"
+                    content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
+                />
+            </head>
+            <body
+                style={{
+                    width: "100%",
+                }}
+            >
+                {children}
+            </body>
         </html>
     );
 }
