@@ -200,7 +200,7 @@ export function Contact(_props: ContactProps) {
                                                     styles.contact_button
                                                 }
                                                 onClick={() =>
-                                                    handleCall("010-0000-0000")
+                                                    handleCall("010-9099-8225")
                                                 }
                                                 title="전화 걸기"
                                             >
@@ -211,7 +211,7 @@ export function Contact(_props: ContactProps) {
                                                     styles.contact_button
                                                 }
                                                 onClick={() =>
-                                                    handleSMS("010-0000-0000")
+                                                    handleSMS("010-9099-8225")
                                                 }
                                                 title="문자 보내기"
                                             >
@@ -234,7 +234,7 @@ export function Contact(_props: ContactProps) {
                                                     styles.contact_button
                                                 }
                                                 onClick={() =>
-                                                    handleCall("010-0000-0000")
+                                                    handleCall("010-7434-8288")
                                                 }
                                                 title="전화 걸기"
                                             >
@@ -245,7 +245,7 @@ export function Contact(_props: ContactProps) {
                                                     styles.contact_button
                                                 }
                                                 onClick={() =>
-                                                    handleSMS("010-0000-0000")
+                                                    handleSMS("010-7434-8288")
                                                 }
                                                 title="문자 보내기"
                                             >
@@ -268,7 +268,7 @@ export function Contact(_props: ContactProps) {
                                                     styles.contact_button
                                                 }
                                                 onClick={() =>
-                                                    handleCall("010-0000-0000")
+                                                    handleCall("010-4753-6302")
                                                 }
                                                 title="전화 걸기"
                                             >
@@ -279,7 +279,7 @@ export function Contact(_props: ContactProps) {
                                                     styles.contact_button
                                                 }
                                                 onClick={() =>
-                                                    handleSMS("010-0000-0000")
+                                                    handleSMS("010-4753-6302")
                                                 }
                                                 title="문자 보내기"
                                             >
@@ -315,7 +315,7 @@ export function Contact(_props: ContactProps) {
                                                     styles.contact_button
                                                 }
                                                 onClick={() =>
-                                                    handleCall("010-0000-0000")
+                                                    handleCall("010-4256-6973")
                                                 }
                                                 title="전화 걸기"
                                             >
@@ -326,7 +326,7 @@ export function Contact(_props: ContactProps) {
                                                     styles.contact_button
                                                 }
                                                 onClick={() =>
-                                                    handleSMS("010-0000-0000")
+                                                    handleSMS("010-4256-6973")
                                                 }
                                                 title="문자 보내기"
                                             >
@@ -349,7 +349,7 @@ export function Contact(_props: ContactProps) {
                                                     styles.contact_button
                                                 }
                                                 onClick={() =>
-                                                    handleCall("010-0000-0000")
+                                                    handleCall("010-2031-6973")
                                                 }
                                                 title="전화 걸기"
                                             >
@@ -360,7 +360,7 @@ export function Contact(_props: ContactProps) {
                                                     styles.contact_button
                                                 }
                                                 onClick={() =>
-                                                    handleSMS("010-0000-0000")
+                                                    handleSMS("010-2031-6973")
                                                 }
                                                 title="문자 보내기"
                                             >
