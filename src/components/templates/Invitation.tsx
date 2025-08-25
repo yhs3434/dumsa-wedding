@@ -4,14 +4,15 @@ import React from "react";
 import Image from "next/image";
 
 type InvitationProps = {
+    position?: "absolute";
     visible?: boolean;
 };
 
-export function Invitation({ visible }: InvitationProps) {
+export function Invitation({ position, visible }: InvitationProps) {
     return (
         <div
             style={{
-                position: "absolute",
+                position: position || undefined,
                 top: 0,
                 left: 0,
                 width: "100%",
