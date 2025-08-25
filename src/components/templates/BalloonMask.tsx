@@ -1,6 +1,8 @@
 "use client";
 
-import React, { useMemo } from "react";
+import React, { useMemo, useState, useCallback, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import Lottie from "lottie-react";
 import { Balloon } from "../atoms";
 
 type BalloonMaskProps = {
@@ -23,9 +25,41 @@ interface RandomBalloon {
     animationDuration: number;
     animationDelay: number;
     zIndex: number;
+    popped: boolean;
+}
+
+interface ConfettiEffect {
+    id: number;
+    left: number;
+    top: number;
+    animationData?: any;
 }
 
 export function BalloonMask({ visible }: BalloonMaskProps) {
+    const router = useRouter();
+    const [poppedBalloons, setPoppedBalloons] = useState<Set<number>>(
+        new Set()
+    );
+    const [confettiEffects, setConfettiEffects] = useState<ConfettiEffect[]>(
+        []
+    );
+    const [allHeartLovePopped, setAllHeartLovePopped] = useState(false);
+    const [confettiData, setConfettiData] = useState<any>(null);
+
+    // confetti 애니메이션 데이터 로드
+    useEffect(() => {
+        const loadConfettiData = async () => {
+            try {
+                const response = await fetch("/images/intro/confetti.json");
+                const data = await response.json();
+                setConfettiData(data);
+            } catch (error) {
+                console.error("Failed to load confetti animation:", error);
+            }
+        };
+        loadConfettiData();
+    }, []);
+
     const balloons = useMemo(() => {
         const balloonTypes: BalloonType[] = [
             "circle_pink",
@@ -47,54 +81,116 @@ export function BalloonMask({ visible }: BalloonMaskProps) {
             result.push({
                 id: i,
                 type: "heart_love",
-                left: Math.random() * 85, // 0-85% 범위 (화면 안쪽에)
-                top: Math.random() * 80, // 0-80% 범위 (화면 안쪽에)
-                size: Math.random() * 10 + 20, // 20-30% 크기 (크게)
+                left: Math.random() * 60 + 10, // 10% ~ 70% 범위 (뷰포트 안에 확실히 위치)
+                top: Math.random() * 60 + 10, // 10% ~ 70% 범위 (뷰포트 안에 확실히 위치)
+                size: Math.random() * 10 + 30, // 25-40% 크기 (매우 크게)
                 animationDuration: Math.random() * 10 + 25, // 25-35초 (천천히)
                 animationDelay: Math.random() * 5, // 0-5초 지연 (빨리 등장)
                 zIndex: Math.floor(Math.random() * 3) + 18, // 18-20 (최상단)
+                popped: false,
             });
         }
 
-        // 나머지 풍선들 대폭 증가 (600-800개)
-        const regularBalloonCount = Math.floor(Math.random() * 201) + 600; // 600-800개
+        // 일반 풍선들 증가 (200-300개)
+        const regularBalloonCount = Math.floor(Math.random() * 101) + 200; // 200-300개
         for (let i = 4; i < regularBalloonCount + 4; i++) {
             const randomType =
                 regularTypes[Math.floor(Math.random() * regularTypes.length)];
             result.push({
                 id: i,
                 type: randomType,
-                left: Math.random() * 105, // 0-105% 범위 (화면 밖까지)
-                top: Math.random() * 130, // 0-130% 범위 (위아래 화면 밖까지)
-                size: Math.random() * 14 + 6, // 6-20% 크기 (더 다양하게)
+                left: Math.random() * 90 - 10, // -15% ~ 115% 범위 (화면 좌우 밖까지)
+                top: Math.random() * 90 - 10, // -20% ~ 120% 범위 (화면 위아래 밖까지)
+                size: Math.random() * 5 + 25, // 15-35% 크기 (매우 크게)
                 animationDuration: Math.random() * 25 + 15, // 15-40초 (더 다양한 속도)
-                animationDelay: Math.random() * 20, // 0-20초 지연 (더 긴 지연)
+                animationDelay: Math.random() * 15, // 0-15초 지연
                 zIndex: Math.floor(Math.random() * 8) + 1, // 1-8
-            });
-        }
-
-        // 빈 공간을 채우기 위한 추가 작은 풍선들 (200개)
-        for (
-            let i = regularBalloonCount + 4;
-            i < regularBalloonCount + 204;
-            i++
-        ) {
-            const randomType =
-                regularTypes[Math.floor(Math.random() * regularTypes.length)];
-            result.push({
-                id: i,
-                type: randomType,
-                left: Math.random() * 100, // 전체 화면
-                top: Math.random() * 120, // 위아래 확장
-                size: Math.random() * 8 + 3, // 3-11% 크기 (작은 풍선들)
-                animationDuration: Math.random() * 30 + 10, // 10-40초 (더 느리게)
-                animationDelay: Math.random() * 25, // 0-25초 지연
-                zIndex: Math.floor(Math.random() * 5) + 1, // 1-5 (뒤쪽 레이어)
+                popped: false,
             });
         }
 
         return result;
     }, []);
+
+    // 풍선 클릭 핸들러
+    const handleBalloonClick = useCallback(
+        (balloonId: number, left: number, top: number) => {
+            if (!visible) return; // visible이 false면 클릭 이벤트 무시
+
+            setPoppedBalloons((prev) => new Set([...prev, balloonId]));
+
+            // confetti 효과 추가
+            if (confettiData) {
+                const newConfetti: ConfettiEffect = {
+                    id: Date.now() + Math.random(),
+                    left: left,
+                    top: top,
+                    animationData: confettiData,
+                };
+                setConfettiEffects((prev) => [...prev, newConfetti]);
+
+                // 3초 후 confetti 제거
+                setTimeout(() => {
+                    setConfettiEffects((prev) =>
+                        prev.filter((c) => c.id !== newConfetti.id)
+                    );
+                }, 3000);
+            }
+        },
+        [confettiData, visible]
+    );
+
+    // heart_love 풍선이 모두 터졌는지 체크
+    useEffect(() => {
+        const heartLoveBalloons = balloons.filter(
+            (b) => b.type === "heart_love"
+        );
+        const poppedHeartLove = heartLoveBalloons.filter((b) =>
+            poppedBalloons.has(b.id)
+        );
+
+        if (
+            heartLoveBalloons.length === poppedHeartLove.length &&
+            heartLoveBalloons.length > 0
+        ) {
+            if (!allHeartLovePopped) {
+                setAllHeartLovePopped(true);
+                // 모든 일반 풍선들 터뜨리기
+                setTimeout(() => {
+                    const allBalloonIds = balloons.map((b) => b.id);
+                    setPoppedBalloons(new Set(allBalloonIds));
+
+                    // 페이지 전체를 덮는 큰 confetti 효과 하나만 실행
+                    if (confettiData) {
+                        const bigConfetti: ConfettiEffect = {
+                            id: Date.now() + Math.random(),
+                            left: 50, // 화면 중앙
+                            top: 50, // 화면 중앙
+                            animationData: confettiData,
+                        };
+
+                        setConfettiEffects((prev) => [...prev, bigConfetti]);
+
+                        // 3초 후 confetti 제거
+                        setTimeout(() => {
+                            setConfettiEffects((prev) =>
+                                prev.filter((c) => c.id !== bigConfetti.id)
+                            );
+                        }, 3000);
+                    }
+                }, 500);
+            }
+        }
+    }, [poppedBalloons, balloons, allHeartLovePopped, confettiData]);
+
+    // 모든 풍선이 터졌는지 체크하고 페이지 이동
+    useEffect(() => {
+        if (balloons.length > 0 && poppedBalloons.size === balloons.length) {
+            setTimeout(() => {
+                router.replace("/invitation");
+            }, 1500);
+        }
+    }, [poppedBalloons, balloons, router]);
 
     return (
         <div
@@ -109,45 +205,88 @@ export function BalloonMask({ visible }: BalloonMaskProps) {
                 transition: "opacity 0.5s ease-in-out",
                 zIndex: 10,
                 overflow: "hidden",
-                pointerEvents: "none", // 풍선들이 클릭을 방해하지 않도록
+                pointerEvents: "auto", // 클릭 이벤트를 위해 변경
             }}
         >
-            {balloons.map((balloon) => (
-                <div
-                    key={balloon.id}
-                    style={{
-                        position: "absolute",
-                        left: `${balloon.left}%`,
-                        top: `${balloon.top}%`,
-                        zIndex: balloon.zIndex,
-                        animation: `float-${balloon.id % 5} ${
-                            balloon.animationDuration
-                        }s ease-in-out ${balloon.animationDelay}s infinite`,
-                    }}
-                >
-                    <div
-                        style={{
-                            width: `${balloon.size}vw`,
-                            height: "auto",
-                            minWidth: "30px",
-                            maxWidth:
-                                balloon.type === "heart_love"
-                                    ? "200px"
-                                    : "150px",
-                            ...(balloon.type === "heart_love" && {
-                                animation: `${`float-${balloon.id % 5}`} ${
+            {balloons.map(
+                (balloon) =>
+                    !poppedBalloons.has(balloon.id) && (
+                        <div
+                            key={balloon.id}
+                            style={{
+                                position: "absolute",
+                                left: `${balloon.left}%`,
+                                top: `${balloon.top}%`,
+                                zIndex: balloon.zIndex,
+                                animation: `float-${balloon.id % 5} ${
                                     balloon.animationDuration
                                 }s ease-in-out ${
                                     balloon.animationDelay
-                                }s infinite, glow 2s ease-in-out infinite alternate`,
-                            }),
-                        }}
-                    >
-                        <Balloon
-                            type={balloon.type}
-                            highlight={balloon.type === "heart_love"}
+                                }s infinite`,
+                            }}
+                        >
+                            <div
+                                style={{
+                                    width: `${balloon.size}vw`,
+                                    height: "auto",
+                                    minWidth: "50px",
+                                    maxWidth:
+                                        balloon.type === "heart_love"
+                                            ? "300px"
+                                            : "250px",
+                                    ...(balloon.type === "heart_love" && {
+                                        animation: `${`float-${
+                                            balloon.id % 5
+                                        }`} ${
+                                            balloon.animationDuration
+                                        }s ease-in-out ${
+                                            balloon.animationDelay
+                                        }s infinite, glow 2s ease-in-out infinite alternate`,
+                                    }),
+                                }}
+                            >
+                                <Balloon
+                                    type={balloon.type}
+                                    highlight={balloon.type === "heart_love"}
+                                    onClick={() =>
+                                        handleBalloonClick(
+                                            balloon.id,
+                                            balloon.left,
+                                            balloon.top
+                                        )
+                                    }
+                                />
+                            </div>
+                        </div>
+                    )
+            )}
+
+            {/* Lottie Confetti 효과 */}
+            {confettiEffects.map((confetti) => (
+                <div
+                    key={confetti.id}
+                    style={{
+                        position: "absolute",
+                        left: `${confetti.left}%`,
+                        top: `${confetti.top}%`,
+                        zIndex: 100,
+                        pointerEvents: "none",
+                        width: "100vw", // 페이지 전체 너비
+                        height: "100vh", // 페이지 전체 높이
+                        transform: "translate(-50%, -50%)", // 중심점 맞추기
+                    }}
+                >
+                    {confetti.animationData && (
+                        <Lottie
+                            animationData={confetti.animationData}
+                            loop={false}
+                            autoplay={true}
+                            style={{
+                                width: "100%",
+                                height: "100%",
+                            }}
                         />
-                    </div>
+                    )}
                 </div>
             ))}
 

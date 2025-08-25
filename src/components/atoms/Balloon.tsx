@@ -12,9 +12,10 @@ type BalloonProps = {
         | "heart_love";
     zIndex?: number;
     highlight?: boolean;
+    onClick?: () => void;
 };
 
-export function Balloon({ type, zIndex, highlight }: BalloonProps) {
+export function Balloon({ type, zIndex, highlight, onClick }: BalloonProps) {
     return (
         <div
             style={{
@@ -30,6 +31,7 @@ export function Balloon({ type, zIndex, highlight }: BalloonProps) {
                 width={0}
                 height={0}
                 sizes="100vw"
+                onClick={onClick}
                 style={{
                     width: "100%",
                     height: "auto",
@@ -37,6 +39,7 @@ export function Balloon({ type, zIndex, highlight }: BalloonProps) {
                     filter: highlight
                         ? "drop-shadow(0 0 20px rgba(255, 215, 0, 0.8)) drop-shadow(0 0 40px rgba(255, 215, 0, 0.6))"
                         : "none",
+                    cursor: onClick ? "pointer" : "default",
                 }}
             />
         </div>
