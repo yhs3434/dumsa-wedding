@@ -1,11 +1,11 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
 
-type LocationProps = {
-    //
-};
+type LocationProps = Record<string, never>; // 빈 객체 타입 대신 사용
 
-export function Location(props: LocationProps) {
+export function Location(_props: LocationProps) {
     return (
         <div
             style={{

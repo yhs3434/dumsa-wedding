@@ -1,11 +1,11 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
 
-type ContactProps = {
-    //
-};
+type ContactProps = Record<string, never>; // 빈 객체 타입 대신 사용
 
-export function Contact(props: ContactProps) {
+export function Contact(_props: ContactProps) {
     return (
         <div
             style={{

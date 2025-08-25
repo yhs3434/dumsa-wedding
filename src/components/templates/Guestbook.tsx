@@ -1,11 +1,11 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
 
-type GuestbookProps = {
-    //
-};
+type GuestbookProps = Record<string, never>; // 빈 객체 타입 대신 사용
 
-export function Guestbook(props: GuestbookProps) {
+export function Guestbook(_props: GuestbookProps) {
     return (
         <div
             style={{

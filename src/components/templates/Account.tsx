@@ -1,11 +1,11 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
 
-type AccountProps = {
-    //
-};
+type AccountProps = Record<string, never>; // 빈 객체 타입 대신 사용
 
-export function Account(props: AccountProps) {
+export function Account(_props: AccountProps) {
     return (
         <div
             style={{

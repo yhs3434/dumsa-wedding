@@ -1,11 +1,11 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
 
-type CalendarProps = {
-    //
-};
+type CalendarProps = Record<string, never>; // 빈 객체 타입 대신 사용
 
-export function Calendar(props: CalendarProps) {
+export function Calendar(_props: CalendarProps) {
     return (
         <div
             style={{

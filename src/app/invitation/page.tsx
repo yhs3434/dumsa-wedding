@@ -90,6 +90,8 @@ export default function InvitationPage() {
         setVisibleSections((prev) => ({ ...prev, invitation: true }));
 
         return () => observer.disconnect();
+        // sectionRefs는 객체이므로 의존성에서 제외하고 대신 빈 배열 사용
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const getSectionStyle = (isVisible: boolean) => ({

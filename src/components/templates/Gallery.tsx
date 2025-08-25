@@ -1,11 +1,11 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
 
-type GalleryProps = {
-    //
-};
+type GalleryProps = Record<string, never>; // 빈 객체 타입 대신 사용
 
-export function Gallery(props: GalleryProps) {
+export function Gallery(_props: GalleryProps) {
     return (
         <div
             style={{
