@@ -32,7 +32,7 @@ interface ConfettiEffect {
     id: number;
     left: number;
     top: number;
-    animationData?: any;
+    animationData?: object;
 }
 
 export function BalloonMask({ visible }: BalloonMaskProps) {
@@ -44,7 +44,7 @@ export function BalloonMask({ visible }: BalloonMaskProps) {
         []
     );
     const [allHeartLovePopped, setAllHeartLovePopped] = useState(false);
-    const [confettiData, setConfettiData] = useState<any>(null);
+    const [confettiData, setConfettiData] = useState<object | null>(null);
 
     // confetti 애니메이션 데이터 로드
     useEffect(() => {
@@ -61,13 +61,6 @@ export function BalloonMask({ visible }: BalloonMaskProps) {
     }, []);
 
     const balloons = useMemo(() => {
-        const balloonTypes: BalloonType[] = [
-            "circle_pink",
-            "circle_pink2",
-            "circle_ivory",
-            "heart",
-            "heart_love",
-        ];
         const regularTypes: BalloonType[] = [
             "circle_pink",
             "circle_pink2",
