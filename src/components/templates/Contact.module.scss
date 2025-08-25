@@ -1,0 +1,62 @@
+.contact_table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+
+    thead {
+        tr {
+            td {
+                padding: 12px 0;
+                border-bottom: 1px solid #ddd;
+                font-weight: bold;
+
+                span:first-child {
+                    font-size: 18px;
+                    color: #ddd;
+                    margin-right: 10px;
+                }
+
+                span:last-child {
+                    font-size: 12px;
+                    color: #aaa;
+                }
+            }
+        }
+    }
+
+    tbody {
+        tr {
+            td {
+                padding: 10px 0;
+
+                &:first-child {
+                    width: 30%;
+                    font-size: 16px;
+                    color: #eee;
+                }
+
+                &:nth-child(2) {
+                    width: 40%;
+                    font-size: 18px;
+                    color: #fff;
+                    font-weight: 600;
+                }
+
+                &:last-child {
+                    width: 30%;
+                    text-align: right;
+                }
+
+                span {
+                    display: inline-block;
+                }
+            }
+
+            &:last-child {
+                td {
+                    border-bottom: none;
+                }
+            }
+        }
+    }
+}
