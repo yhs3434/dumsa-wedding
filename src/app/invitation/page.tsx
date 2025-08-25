@@ -1,7 +1,19 @@
 "use client";
 
 import React from "react";
-import { Invitation } from "@/components/templates";
+import {
+    Invitation,
+    Welcome,
+    Contact,
+    Gallery,
+    Calendar,
+    Location,
+    Guestbook,
+    Account,
+    Rsvp,
+    Final,
+} from "@/components/templates";
+import { VerticalGap } from "@/components/atoms";
 
 export default function InvitationPage() {
     return (
@@ -12,17 +24,24 @@ export default function InvitationPage() {
             }}
         >
             <Invitation visible={true} />
-            <div
-                style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    paddingTop: 200,
-                    paddingBottom: 200,
-                }}
-            >
-                작업중...
-            </div>
+            <VerticalGap size={100} />
+            <Welcome />
+            <VerticalGap size={100} />
+            <Contact />
+            <VerticalGap size={100} />
+            <Gallery />
+            <VerticalGap size={100} />
+            <Calendar />
+            <VerticalGap size={100} />
+            <Location />
+            <VerticalGap size={100} />
+            <Guestbook />
+            <VerticalGap size={100} />
+            <Account />
+            <VerticalGap size={100} />
+            <Rsvp />
+            <VerticalGap size={100} />
+            <Final />
         </div>
     );
 }

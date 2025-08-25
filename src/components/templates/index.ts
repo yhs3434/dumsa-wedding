@@ -1,3 +1,12 @@
 export { Intro } from "./Intro";
 export { BalloonMask } from "./BalloonMask";
 export { Invitation } from "./Invitation";
+export { Welcome } from "./Welcome";
+export { Contact } from "./Contact";
+export { Gallery } from "./Gallery";
+export { Calendar } from "./Calendar";
+export { Location } from "./Location";
+export { Guestbook } from "./Guestbook";
+export { Account } from "./Account";
+export { Rsvp } from "./Rsvp";
+export { Final } from "./Final";
