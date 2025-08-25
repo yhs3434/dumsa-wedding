@@ -76,7 +76,7 @@ export function BalloonMask({ visible }: BalloonMaskProps) {
                 type: "heart_love",
                 left: Math.random() * 60 + 10, // 10% ~ 70% 범위 (뷰포트 안에 확실히 위치)
                 top: Math.random() * 60 + 10, // 10% ~ 70% 범위 (뷰포트 안에 확실히 위치)
-                size: Math.random() * 10 + 30, // 25-40% 크기 (매우 크게)
+                size: Math.random() * 15 + 35, // 35-50% 크기 (더 크게)
                 animationDuration: Math.random() * 10 + 25, // 25-35초 (천천히)
                 animationDelay: Math.random() * 5, // 0-5초 지연 (빨리 등장)
                 zIndex: Math.floor(Math.random() * 3) + 18, // 18-20 (최상단)
@@ -84,19 +84,19 @@ export function BalloonMask({ visible }: BalloonMaskProps) {
             });
         }
 
-        // 일반 풍선들 증가 (200-300개)
-        const regularBalloonCount = Math.floor(Math.random() * 101) + 200; // 200-300개
+        // 일반 풍선들 대폭 감소 (50-80개)
+        const regularBalloonCount = Math.floor(Math.random() * 31) + 50; // 50-80개
         for (let i = 4; i < regularBalloonCount + 4; i++) {
             const randomType =
                 regularTypes[Math.floor(Math.random() * regularTypes.length)];
             result.push({
                 id: i,
                 type: randomType,
-                left: Math.random() * 90 - 10, // -15% ~ 115% 범위 (화면 좌우 밖까지)
-                top: Math.random() * 90 - 10, // -20% ~ 120% 범위 (화면 위아래 밖까지)
-                size: Math.random() * 5 + 25, // 15-35% 크기 (매우 크게)
-                animationDuration: Math.random() * 25 + 15, // 15-40초 (더 다양한 속도)
-                animationDelay: Math.random() * 15, // 0-15초 지연
+                left: Math.random() * 90 - 10, // -10% ~ 90% 범위 (화면 좌우 밖까지)
+                top: Math.random() * 90 - 10, // -10% ~ 90% 범위 (화면 위아래 밖까지)
+                size: Math.random() * 10 + 30, // 30-40% 크기 (크게)
+                animationDuration: Math.random() * 20 + 20, // 20-40초 (더 천천히)
+                animationDelay: Math.random() * 10, // 0-10초 지연
                 zIndex: Math.floor(Math.random() * 8) + 1, // 1-8
                 popped: false,
             });
@@ -211,6 +211,7 @@ export function BalloonMask({ visible }: BalloonMaskProps) {
                                 left: `${balloon.left}%`,
                                 top: `${balloon.top}%`,
                                 zIndex: balloon.zIndex,
+                                willChange: "transform", // 렌더링 최적화
                                 animation: `float-${balloon.id % 5} ${
                                     balloon.animationDuration
                                 }s ease-in-out ${
@@ -222,11 +223,12 @@ export function BalloonMask({ visible }: BalloonMaskProps) {
                                 style={{
                                     width: `${balloon.size}vw`,
                                     height: "auto",
-                                    minWidth: "50px",
+                                    minWidth: "60px", // 최소 크기 증가
                                     maxWidth:
                                         balloon.type === "heart_love"
-                                            ? "300px"
-                                            : "250px",
+                                            ? "400px" // heart_love 최대 크기 증가
+                                            : "350px", // 일반 풍선도 크기 증가
+                                    willChange: "transform", // 렌더링 최적화
                                     ...(balloon.type === "heart_love" && {
                                         animation: `${`float-${
                                             balloon.id % 5
