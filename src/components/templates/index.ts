@@ -1,3 +1,3 @@
 export { Intro } from "./Intro";
-export { Balloon } from "./Balloon";
+export { BalloonMask } from "./BalloonMask";
 export { Invitation } from "./Invitation";

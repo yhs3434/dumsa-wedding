@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Intro, Balloon, Invitation } from "@/components/templates";
+import { Intro, BalloonMask, Invitation } from "@/components/templates";
 
 export default function IntroPage() {
     const [currentPage, setCurrentPage] = React.useState<
@@ -32,6 +32,7 @@ export default function IntroPage() {
         >
             <Intro visible={currentPage === "intro"} />
             <Invitation visible={currentPage === "invitation"} />
+            <BalloonMask visible={currentPage === "invitation"} />
         </div>
     );
 }
